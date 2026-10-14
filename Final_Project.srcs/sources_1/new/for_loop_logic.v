@@ -5,10 +5,11 @@ use IEEE.NUMERIC_STD.ALL;
 entity for_loop_logic is
     Port (
         clk    : in  STD_LOGIC;
+        n      : in  STD_LOGIC_VECTOR(7 downto 0);
         b      : in  STD_LOGIC_VECTOR(7 downto 0);
         a_i    : in  STD_LOGIC_VECTOR(7 downto 0);
         R      : in  STD_LOGIC_VECTOR(7 downto 0);
-        result : out STD_LOGIC_VECTOR(7 downto 0)
+        done   : out STD_LOGIC_VECTOR(7 downto 0)
     );
 end for_loop_logic;
 
@@ -45,6 +46,9 @@ begin
                         R2 := std_logic_vector(unsigned(R2) - unsigned(n));
                     end if;
                     state <= FINISH;
+                    
+                when FINISH =>
+                    done := 1;
                     
             end case;
 
