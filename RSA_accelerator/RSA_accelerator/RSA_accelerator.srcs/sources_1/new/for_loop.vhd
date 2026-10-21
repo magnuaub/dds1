@@ -4,7 +4,8 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity for_loop_logic is
     Port (
-        clk    : in  STD_LOGIC;
+        clk     : in  STD_LOGIC;
+        reset_n : in  STD_LOGIC;
         n      : in  STD_LOGIC_VECTOR(7 downto 0);
         b      : in  STD_LOGIC_VECTOR(7 downto 0);
         a_i    : in  STD_LOGIC_VECTOR(7 downto 0);
@@ -21,7 +22,6 @@ architecture Behavioral of for_loop_logic is
 
     signal r1 : unsigned(15 downto 0) := (others => '0');
     signal r2 : unsigned(15 downto 0) := (others => '0');
-    signal result_reg : unsigned(7 downto 0) := (others => '0');
 
 begin
 
@@ -32,7 +32,13 @@ begin
     process(clk)
         variable temp : unsigned(15 downto 0);
     begin
-        if rising_edge(clk) then
+        
+        if reset_n = '0' then
+            -- Reset the FSM and all internal registers
+            state <= START;
+            r1 <= (others => '0');
+            r2 <= (others => '0');
+        elsif rising_edge(clk) then
 
             case state is
 
@@ -43,25 +49,24 @@ begin
                 when MULT_LS =>
                     temp := resize(unsigned(r2(7 downto 0)) * unsigned(b), 16);
                     r2 <= temp;
-                    r1 <= shift_left(r2, 1);
+                    r1 <= shift_left(resize(unsigned(R), 16), 1);
                     state <= ADD;
                     
                 when ADD =>
-                    -- Calculate 3 * (a_i * b)
                     r2 <= r1 + r2;
                     state <= MODULO;
 
                 when MODULO =>
-                    if signed(r2) >= 0 then
+                    if r2(15) = '0' then
                         r1 <= r2;
-                        r2 <= r2 - unsigned(n);
+                        r2 <= r2 - resize(unsigned(n), 16);
                         state <= MODULO; 
                     else
                         state <= FINISH;
                     end if;
 
                 when FINISH =>
-                    null;
+                    state <= START;
 
             end case;
         end if;
