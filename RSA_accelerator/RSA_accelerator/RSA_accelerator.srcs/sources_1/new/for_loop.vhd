@@ -8,7 +8,7 @@ entity for_loop_logic is
         reset_n : in  STD_LOGIC;
         n      : in  STD_LOGIC_VECTOR(7 downto 0);
         b      : in  STD_LOGIC_VECTOR(7 downto 0);
-        a_i    : in  STD_LOGIC_VECTOR(7 downto 0);
+        a_i    : in  STD_LOGIC;
         R      : in  STD_LOGIC_VECTOR(7 downto 0);
         done   : out STD_LOGIC;
         result : out STD_LOGIC_VECTOR(7 downto 0)
@@ -43,11 +43,11 @@ begin
             case state is
 
                 when START =>
-                    r2 <= resize(unsigned(a_i), 16);
+                    r2 <= (15 downto 1 => '0') & a_i;
                     state <= MULT_LS;
 
                 when MULT_LS =>
-                    temp := resize(unsigned(r2(7 downto 0)) * unsigned(b), 16);
+                    temp := resize(unsigned(r2(0 downto 0)) * unsigned(b), 16);
                     r2 <= temp;
                     r1 <= shift_left(resize(unsigned(R), 16), 1);
                     state <= ADD;
