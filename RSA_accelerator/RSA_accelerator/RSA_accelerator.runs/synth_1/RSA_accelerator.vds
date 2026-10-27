@@ -1,0 +1,365 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Wed Oct 21 17:58:30 2026
+# Process ID         : 11792
+# Current directory  : C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/RSA_accelerator/RSA_accelerator.runs/synth_1
+# Command line       : vivado.exe -log RSA_accelerator.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source RSA_accelerator.tcl
+# Log file           : C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/RSA_accelerator/RSA_accelerator.runs/synth_1/RSA_accelerator.vds
+# Journal file       : C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/RSA_accelerator/RSA_accelerator.runs/synth_1\vivado.jou
+# Running On         : LAB-PC
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : Intel(R) Xeon(R) CPU E3-1240 v5 @ 3.50GHz
+# CPU Frequency      : 3504 MHz
+# CPU Physical cores : 4
+# CPU Logical cores  : 8
+# Host memory        : 34287 MB
+# Swap memory        : 2147 MB
+# Total Virtual      : 36435 MB
+# Available Virtual  : 19590 MB
+#-----------------------------------------------------------
+source RSA_accelerator.tcl -notrace
+create_project: Time (s): cpu = 00:00:12 ; elapsed = 00:00:10 . Memory (MB): peak = 527.648 ; gain = 220.512
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/IP'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/2025.2/Vivado/data/ip'.
+WARNING: [IP_Flow 19-4995] The host OS only allows 260 characters in a normal path. The IP cache path is more than 80 characters. If you experience issues with IP caching, please consider changing the IP cache to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter. 
+Current IP cache path is c:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/RSA_accelerator/RSA_accelerator.cache/ip 
+Command: synth_design -top RSA_accelerator -part xc7z020clg400-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 21936
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1307.992 ; gain = 540.660
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'rsa_accelerator' [C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/source/rsa_accelerator.vhd:84]
+INFO: [Synth 8-638] synthesizing module 'rsa_regio' [C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/source/rsa_regio.vhd:115]
+	Parameter C_BLOCK_SIZE bound to: 256 - type: integer 
+	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AXI_ADDR_WIDTH bound to: 8 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'rsa_regio' (0#1818) [C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/source/rsa_regio.vhd:115]
+INFO: [Synth 8-638] synthesizing module 'rsa_msgin' [C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/source/rsa_msgin.vhd:69]
+	Parameter C_S_AXIS_TDATA_WIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'rsa_msgin' (0#1818) [C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/source/rsa_msgin.vhd:69]
+INFO: [Synth 8-638] synthesizing module 'rsa_msgout' [C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/source/rsa_msgout.vhd:61]
+	Parameter C_M_AXIS_TDATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_M_START_COUNT bound to: 32 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'rsa_msgout' (0#1818) [C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/source/rsa_msgout.vhd:61]
+INFO: [Synth 8-638] synthesizing module 'rsa_core' [C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/source/rsa_core.vhd:68]
+	Parameter C_BLOCK_SIZE bound to: 256 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'exponentiation' [C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/Exponentiation/source/exponentiation.vhd:34]
+	Parameter C_block_size bound to: 256 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'exponentiation' (0#1818) [C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/Exponentiation/source/exponentiation.vhd:34]
+INFO: [Synth 8-256] done synthesizing module 'rsa_core' (0#1818) [C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/source/rsa_core.vhd:68]
+INFO: [Synth 8-256] done synthesizing module 'rsa_accelerator' (0#1818) [C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/source/rsa_accelerator.vhd:84]
+WARNING: [Synth 8-6014] Unused sequential element slv_reg_reg[33] was removed.  [C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/source/rsa_regio.vhd:245]
+WARNING: [Synth 8-7129] Port key[255] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[254] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[253] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[252] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[251] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[250] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[249] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[248] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[247] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[246] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[245] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[244] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[243] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[242] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[241] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[240] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[239] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[238] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[237] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[236] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[235] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[234] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[233] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[232] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[231] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[230] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[229] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[228] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[227] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[226] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[225] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[224] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[223] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[222] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[221] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[220] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[219] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[218] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[217] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[216] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[215] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[214] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[213] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[212] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[211] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[210] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[209] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[208] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[207] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[206] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[205] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[204] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[203] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[202] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[201] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[200] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[199] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[198] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[197] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[196] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[195] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[194] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[193] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[192] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[191] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[190] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[189] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[188] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[187] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[186] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[185] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[184] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[183] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[182] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[181] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[180] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[179] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[178] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[177] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[176] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[175] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[174] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[173] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[172] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[171] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[170] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[169] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[168] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[167] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[166] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[165] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[164] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[163] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[162] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[161] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[160] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[159] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[158] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[157] in module exponentiation is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key[156] in module exponentiation is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1477.145 ; gain = 709.812
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1477.145 ; gain = 709.812
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1477.145 ; gain = 709.812
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.053 . Memory (MB): peak = 1477.145 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/Master_constraints/PYNQ-Z1_C.xdc]
+Finished Parsing XDC File [C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/Master_constraints/PYNQ-Z1_C.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1555.090 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.038 . Memory (MB): peak = 1555.090 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:20 ; elapsed = 00:00:22 . Memory (MB): peak = 1555.090 ; gain = 787.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg400-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:20 ; elapsed = 00:00:22 . Memory (MB): peak = 1555.090 ; gain = 787.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:22 . Memory (MB): peak = 1555.090 ; gain = 787.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 1555.090 ; gain = 787.758
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input    256 Bit         XORs := 1     
++---Registers : 
+	              256 Bit    Registers := 1     
+	               32 Bit    Registers := 42    
+	                8 Bit    Registers := 5     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 7     
++---Muxes : 
+	   4 Input  256 Bit        Muxes := 1     
+	   2 Input   32 Bit        Muxes := 33    
+	   2 Input    8 Bit        Muxes := 160   
+	   4 Input    8 Bit        Muxes := 3     
+	   2 Input    1 Bit        Muxes := 5     
+	   4 Input    1 Bit        Muxes := 3     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-3917] design rsa_accelerator has port m00_axis_tstrb[3] driven by constant 1
+WARNING: [Synth 8-3917] design rsa_accelerator has port m00_axis_tstrb[2] driven by constant 1
+WARNING: [Synth 8-3917] design rsa_accelerator has port m00_axis_tstrb[1] driven by constant 1
+WARNING: [Synth 8-3917] design rsa_accelerator has port m00_axis_tstrb[0] driven by constant 1
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:26 ; elapsed = 00:00:28 . Memory (MB): peak = 1555.090 ; gain = 787.758
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:27 ; elapsed = 00:00:29 . Memory (MB): peak = 1555.090 ; gain = 787.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:27 ; elapsed = 00:00:29 . Memory (MB): peak = 1555.090 ; gain = 787.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1722.270 ; gain = 954.938
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1722.270 ; gain = 954.938
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1722.270 ; gain = 954.938
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1722.270 ; gain = 954.938
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1722.270 ; gain = 954.938
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1722.270 ; gain = 954.938
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+------+------+
+|      |Cell  |Count |
++------+------+------+
+|1     |BUFG  |     1|
+|2     |LUT1  |     1|
+|3     |LUT2  |    24|
+|4     |LUT3  |    37|
+|5     |LUT4  |   228|
+|6     |LUT6  |   426|
+|7     |MUXF7 |   128|
+|8     |MUXF8 |    32|
+|9     |FDCE  |   537|
+|10    |FDRE  |  1067|
+|11    |FDSE  |     8|
+|12    |IBUF  |    90|
+|13    |OBUF  |    80|
++------+------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1722.270 ; gain = 954.938
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 272 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:20 ; elapsed = 00:00:32 . Memory (MB): peak = 1722.270 ; gain = 876.992
+Synthesis Optimization Complete : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1722.270 ; gain = 954.938
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.045 . Memory (MB): peak = 1734.320 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 160 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1837.746 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 1b22d167
+INFO: [Common 17-83] Releasing license: Synthesis
+30 Infos, 106 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:40 ; elapsed = 00:00:58 . Memory (MB): peak = 1837.746 ; gain = 1306.129
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 1837.746 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/RSA_accelerator/RSA_accelerator.runs/synth_1/RSA_accelerator.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file RSA_accelerator_utilization_synth.rpt -pb RSA_accelerator_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Wed Oct 21 17:59:47 2026...

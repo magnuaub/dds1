@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../RSA_accelerator.srcs/sources_1/new/for_loop.vhd" \
+"../../../../RSA_accelerator.srcs/sim_1/new/for_loop_tb.vhd" \
+
+# Do not sort compile order
+nosort

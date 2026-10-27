@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Wed Oct 21 17:58:30 2026
+# Process ID         : 11792
+# Current directory  : C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/RSA_accelerator/RSA_accelerator.runs/synth_1
+# Command line       : vivado.exe -log RSA_accelerator.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source RSA_accelerator.tcl
+# Log file           : C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/RSA_accelerator/RSA_accelerator.runs/synth_1/RSA_accelerator.vds
+# Journal file       : C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/RSA_accelerator/RSA_accelerator.runs/synth_1\vivado.jou
+# Running On         : LAB-PC
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : Intel(R) Xeon(R) CPU E3-1240 v5 @ 3.50GHz
+# CPU Frequency      : 3504 MHz
+# CPU Physical cores : 4
+# CPU Logical cores  : 8
+# Host memory        : 34287 MB
+# Swap memory        : 2147 MB
+# Total Virtual      : 36435 MB
+# Available Virtual  : 19590 MB
+#-----------------------------------------------------------
+source RSA_accelerator.tcl -notrace
