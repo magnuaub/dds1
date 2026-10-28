@@ -17,7 +17,7 @@ end for_loop_logic;
 
 architecture Behavioral of for_loop_logic is
 
-    type state_type is (START, MULT_LS, ADD, MODULO, FINISH);
+    type state_type is (START, MULT_LS, ADD, MODULO);
     signal state : state_type := START;
 
     signal r1 : unsigned(15 downto 0) := (others => '0');
@@ -27,7 +27,7 @@ begin
 
     result <= std_logic_vector(r1(7 downto 0));
     
-    done <= '1' when state = FINISH else '0';
+    
 
     process(clk)
         variable temp : unsigned(15 downto 0);
@@ -45,6 +45,7 @@ begin
                 when START =>
                     r2 <= (15 downto 1 => '0') & a_i;
                     state <= MULT_LS;
+                    done <= '0';
 
                 when MULT_LS =>
                     temp := resize(unsigned(r2(0 downto 0)) * unsigned(b), 16);
@@ -62,11 +63,10 @@ begin
                         r2 <= r2 - resize(unsigned(n), 16);
                         state <= MODULO; 
                     else
-                        state <= FINISH;
+                        state <= START;
+                        done <= '1';
                     end if;
-
-                when FINISH =>
-                    state <= START;
+;
 
             end case;
         end if;
