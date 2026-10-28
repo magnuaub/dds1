@@ -19,12 +19,11 @@ architecture Behavioral of blakely is
     type state_type is (START, CALC, FINISH);
     signal state : state_type := START;
     
-    signal a_i      : STD_LOGIC;
     signal for_done : STD_LOGIC;
     signal for_R    : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
-    
-    signal r1 : unsigned(15 downto 0) := (others => '0');
-    signal r2 : unsigned(15 downto 0) := (others => '0');
+    signal a_shift : STD_LOGIC_VECTOR(7 downto 0) := (others => '0');
+    signal r1 : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+    signal r2 : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
     
 
 
@@ -35,7 +34,7 @@ begin
             clk    => clk,
             n      => n,
             b      => b,
-            a_i    => a_i,
+            a_i    => a_shift(7),
             R      => for_R,
             done   => for_done,
             reset_n => reset_n,
@@ -49,25 +48,31 @@ begin
         if reset_n = '0' then
             r1 <= (others => '0'); --R
             r2 <= (others => '0'); --i
+            state <= START;
+            a_shift <= a;
 
         elsif rising_edge(clk) then
 
             case state is
-
                 when START =>
                     r1 <= (others => '0');
                     r2 <= (others => '0');
+                    state <= CALC;
                    
                 when CALC =>
-                    if (r2 >= a'length - 1) then
-                        if ()
-                        r1 <= ;
-                        r2 <= r2 + 1;
+         
+                    if (unsigned(r2) < a'length - 1) then
+                        if (for_done = '1') then
+                            a_shift <= a_shift(6 downto 0) & '0' ;
+                            r1 <= for_R;
+                            r2 <= std_logic_vector(unsigned(r2) + 1);
+                        end if;
                     else
-                        --done
-                    end
+                        state <= FINISH;
+                    end if;
+                    
                 when FINISH =>
-                    state <= START;
+                    null;
 
             end case;
         end if;
