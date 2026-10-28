@@ -1,0 +1,27 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 12:34:56 MST 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Wed Oct 28 16:06:10 2026
+# Process ID         : 1062178
+# Current directory  : /home/c505/DDS1
+# Command line       : vivado
+# Log file           : /home/c505/DDS1/vivado.log
+# Journal file       : /home/c505/DDS1/vivado.jou
+# Running On         : c505
+# Platform           : Linuxmint
+# Operating System   : Linux Mint 22.2
+# Processor Detail   : Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz
+# CPU Frequency      : 3703.869 MHz
+# CPU Physical cores : 4
+# CPU Logical cores  : 8
+# Host memory        : 16449 MB
+# Swap memory        : 2147 MB
+# Total Virtual      : 18597 MB
+# Available Virtual  : 13425 MB
+#-----------------------------------------------------------
+start_gui
+open_project /home/c505/DDS1/RSA_accelerator/RSA_accelerator/RSA_accelerator.xpr
+update_compile_order -fileset sources_1
+launch_simulation

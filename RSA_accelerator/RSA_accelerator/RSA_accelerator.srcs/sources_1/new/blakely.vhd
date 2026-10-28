@@ -6,11 +6,11 @@ entity blakely is
     Port (
         clk     : in  STD_LOGIC;
         reset_n : in  STD_LOGIC;
-        n      : in  STD_LOGIC_VECTOR(7 downto 0);
-        b      : in  STD_LOGIC_VECTOR(7 downto 0);
-        a      : in  STD_LOGIC_VECTOR(7 downto 0);
-        R      : out  STD_LOGIC_VECTOR(7 downto 0);
-        done   : out STD_LOGIC
+        n       : in  STD_LOGIC_VECTOR(7 downto 0);
+        b       : in  STD_LOGIC_VECTOR(7 downto 0);
+        a       : in  STD_LOGIC_VECTOR(7 downto 0);
+        R       : out  STD_LOGIC_VECTOR(7 downto 0);
+        done    : out STD_LOGIC
     );
 end blakely;
 
@@ -19,11 +19,12 @@ architecture Behavioral of blakely is
     type state_type is (START, CALC, FINISH);
     signal state : state_type := START;
     
-    signal for_done : STD_LOGIC;
-    signal for_R    : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
-    signal a_shift : STD_LOGIC_VECTOR(7 downto 0) := (others => '0');
-    signal r1 : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
-    signal r2 : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+    signal for_done    : STD_LOGIC;
+    signal for_reset_n : STD_LOGIC;
+    signal for_R       : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+    signal a_shift     : STD_LOGIC_VECTOR(7 downto 0) := (others => '0');
+    signal r1          : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+    signal r2          : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
     
 
 
@@ -37,7 +38,7 @@ begin
             a_i    => a_shift(7),
             R      => for_R,
             done   => for_done,
-            reset_n => reset_n,
+            reset_n => for_reset_n,
             result => R
         );
 
@@ -50,6 +51,7 @@ begin
             r2 <= (others => '0'); --i
             state <= START;
             a_shift <= a;
+            for_reset_n <= '1';
 
         elsif rising_edge(clk) then
 
@@ -58,12 +60,13 @@ begin
                     r1 <= (others => '0');
                     r2 <= (others => '0');
                     state <= CALC;
+                    for_reset_n <= '0';
                    
                 when CALC =>
-         
                     if (unsigned(r2) < a'length - 1) then
                         if (for_done = '1') then
-                            a_shift <= a_shift(6 downto 0) & '0' ;
+                            for_reset_n <= '0';
+                            a_shift <= a_shift(6 downto 0) & '0';
                             r1 <= for_R;
                             r2 <= std_logic_vector(unsigned(r2) + 1);
                         end if;
