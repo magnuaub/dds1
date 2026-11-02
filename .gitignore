@@ -1,9 +1,10 @@
+# Vivado project: ignore everything inside, except the project file and sources
+RSA_accelerator/RSA_accelerator/*
+!RSA_accelerator/RSA_accelerator/RSA_accelerator.xpr
+!RSA_accelerator/RSA_accelerator/RSA_accelerator.srcs/
 
-
-RSA_accelerator/RSA_accelerator/
 RSA_accelerator/IP/
 Exponentiation/Exponentiation/
 RSA_soc/RSA_soc/
 
 .Xil
-*/.Xil
