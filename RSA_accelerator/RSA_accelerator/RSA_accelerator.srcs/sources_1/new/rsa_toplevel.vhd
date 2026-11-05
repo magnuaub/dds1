@@ -1,73 +1,78 @@
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity rsa_toplevel is
-    Port (
-        clk          : in  STD_LOGIC;
-        reset_n      : in  STD_LOGIC;
+    generic (
+        H : positive := 256
+    );
+    port (
+        clk          : in  std_logic;
+        reset_n      : in  std_logic;
 
-        msgin_valid  : in  STD_LOGIC;
-        msgin_ready  : out STD_LOGIC;
-        msgout_valid : out STD_LOGIC;
-        msgout_ready : in  STD_LOGIC;
+        -- Input stream
+        msgin_valid  : in  std_logic;
+        msgin_ready  : out std_logic;
+        msgin_last   : in  std_logic;
+        msgin_data   : in  std_logic_vector(H-1 downto 0);
 
-        n            : in  STD_LOGIC_VECTOR(7 downto 0);
-        m            : in  STD_LOGIC_VECTOR(7 downto 0);
-        e            : in  STD_LOGIC_VECTOR(7 downto 0);
+        -- Output stream
+        msgout_valid : out std_logic;
+        msgout_ready : in  std_logic;
+        msgout_last  : out std_logic;
+        msgout_data  : out std_logic_vector(H-1 downto 0);
 
-        R            : out STD_LOGIC_VECTOR(7 downto 0)
+        -- RSA key parameters
+        n            : in  std_logic_vector(H-1 downto 0);
+        e            : in  std_logic_vector(H-1 downto 0)
     );
 end rsa_toplevel;
 
 architecture Behavioral of rsa_toplevel is
 
-    ----------------------------------------------------------------
-    -- RSA FSM control signals
-    ----------------------------------------------------------------
+    ------------------------------------------------------------
+    -- FSM control signals
+    ------------------------------------------------------------
+    signal load_en   : std_logic;
+    signal mul_start : std_logic;
+    signal sq_start  : std_logic;
+    signal update_c  : std_logic;
+    signal update_p  : std_logic;
+    signal shift_e   : std_logic;
+    signal e_bit     : std_logic;
 
-    signal load_en   : STD_LOGIC;
-    signal mul_start : STD_LOGIC;
-    signal sq_start  : STD_LOGIC;
-    signal update_c  : STD_LOGIC;
-    signal update_p  : STD_LOGIC;
-    signal shift_e   : STD_LOGIC;
-    signal e_bit     : STD_LOGIC;
-
-    ----------------------------------------------------------------
+    ------------------------------------------------------------
     -- RSA datapath registers
-    ----------------------------------------------------------------
+    ------------------------------------------------------------
+    signal C_reg : std_logic_vector(H-1 downto 0);
+    signal P_reg : std_logic_vector(H-1 downto 0);
+    signal E_reg : std_logic_vector(H-1 downto 0);
+    signal N_reg : std_logic_vector(H-1 downto 0);
 
-    signal C_reg     : STD_LOGIC_VECTOR(7 downto 0);
-    signal P_reg     : STD_LOGIC_VECTOR(7 downto 0);
-    signal E_reg     : STD_LOGIC_VECTOR(7 downto 0);
-    signal N_reg     : STD_LOGIC_VECTOR(7 downto 0);
-
-    ----------------------------------------------------------------
+    ------------------------------------------------------------
     -- Blakely outputs
-    ----------------------------------------------------------------
+    ------------------------------------------------------------
+    signal mul_R    : std_logic_vector(H-1 downto 0);
+    signal mul_done : std_logic;
 
-    signal mul_R     : STD_LOGIC_VECTOR(7 downto 0);
-    signal mul_done  : STD_LOGIC;
+    signal sq_R     : std_logic_vector(H-1 downto 0);
+    signal sq_done  : std_logic;
 
-    signal sq_R      : STD_LOGIC_VECTOR(7 downto 0);
-    signal sq_done   : STD_LOGIC;
-
-    ----------------------------------------------------------------
+    ------------------------------------------------------------
     -- Blakely reset signals
-    ----------------------------------------------------------------
-
-    signal mul_reset_n : STD_LOGIC;
-    signal sq_reset_n  : STD_LOGIC;
+    ------------------------------------------------------------
+    signal mul_reset_n : std_logic := '0';
+    signal sq_reset_n  : std_logic := '0';
 
 begin
-    ----------------------------------------------------------------
-    -- RSA FSM
-    ----------------------------------------------------------------
 
+    ------------------------------------------------------------
+    -- RSA FSM
+    ------------------------------------------------------------
     RSA_CONTROLLER : entity work.rsa_fsm
         generic map (
-            H => 8
+            H => H
         )
         port map (
             clk          => clk,
@@ -75,8 +80,11 @@ begin
 
             msgin_valid  => msgin_valid,
             msgin_ready  => msgin_ready,
+            msgin_last   => msgin_last,
+
             msgout_valid => msgout_valid,
             msgout_ready => msgout_ready,
+            msgout_last  => msgout_last,
 
             e_bit        => e_bit,
             mul_done     => mul_done,
@@ -90,11 +98,13 @@ begin
             shift_e      => shift_e
         );
 
-    ----------------------------------------------------------------
+    ------------------------------------------------------------
     -- Blakely multiplier: C * P mod N
-    ----------------------------------------------------------------
-
+    ------------------------------------------------------------
     BLAKELY_MUL : entity work.blakely
+        generic map (
+            BLOCK_SIZE => H
+        )
         port map (
             clk     => clk,
             reset_n => mul_reset_n,
@@ -107,11 +117,13 @@ begin
             done    => mul_done
         );
 
-    ----------------------------------------------------------------
+    ------------------------------------------------------------
     -- Blakely squarer: P * P mod N
-    ----------------------------------------------------------------
-
+    ------------------------------------------------------------
     BLAKELY_SQ : entity work.blakely
+        generic map (
+            BLOCK_SIZE => H
+        )
         port map (
             clk     => clk,
             reset_n => sq_reset_n,
@@ -124,76 +136,78 @@ begin
             done    => sq_done
         );
 
-    ----------------------------------------------------------------
-    -- Datapath registers
-    ----------------------------------------------------------------
-
+    ------------------------------------------------------------
+    -- RSA datapath registers
+    ------------------------------------------------------------
     process(clk)
     begin
         if rising_edge(clk) then
 
             if reset_n = '0' then
+
                 C_reg <= (others => '0');
                 P_reg <= (others => '0');
                 E_reg <= (others => '0');
                 N_reg <= (others => '0');
+
                 mul_reset_n <= '0';
                 sq_reset_n  <= '0';
 
             elsif load_en = '1' then
-                C_reg <= std_logic_vector(to_unsigned(1, 8));
-                P_reg <= m;
+
+                -- Initialize RSA algorithm
+                C_reg <= std_logic_vector(to_unsigned(1, H));
+                P_reg <= msgin_data;
                 E_reg <= e;
                 N_reg <= n;
 
+                mul_reset_n <= '0';
+                sq_reset_n  <= '0';
+
             else
+
+                -- Update accumulated result
                 if update_c = '1' then
                     C_reg <= mul_R;
                 end if;
 
+                -- Update squared value
                 if update_p = '1' then
                     P_reg <= sq_R;
                 end if;
 
+                -- Shift exponent right
                 if shift_e = '1' then
-                    E_reg <= '0' & E_reg(7 downto 1);
+                    E_reg <= '0' & E_reg(H-1 downto 1);
                 end if;
-                
-                if (sq_start = '1') then
+
+                -- Start Blakely units
+                if sq_start = '1' then
                     sq_reset_n <= '1';
                 end if;
-                
-                if (mul_start = '1') then
+
+                if mul_start = '1' then
                     mul_reset_n <= '1';
                 end if;
-                
-                if (shift_e = '1') then  -- shift_e is 1 so mul/sqr outputs no longer needed as that stage is done
-                    sq_reset_n <= '0';
+
+                -- Reset Blakely units after each round
+                if shift_e = '1' then
+                    sq_reset_n  <= '0';
                     mul_reset_n <= '0';
                 end if;
-            
+
             end if;
-            
         end if;
     end process;
 
-    ----------------------------------------------------------------
-    -- Blakely control (placeholder)
-    ----------------------------------------------------------------
-
-    -- TODO: Implement proper start/reset control for both units.
-    -- mul_start and sq_start must trigger a new calculation.
-    --
-    -- The current blakely entity has no start input.
-    -- Its reset_n must be controlled between calculations.
-    
+    ------------------------------------------------------------
+    -- Current exponent bit
+    ------------------------------------------------------------
     e_bit <= E_reg(0);
-    
 
-    ----------------------------------------------------------------
-    -- RSA output
-    ----------------------------------------------------------------
-
-    R <= C_reg;
+    ------------------------------------------------------------
+    -- RSA output data
+    ------------------------------------------------------------
+    msgout_data <= C_reg;
 
 end Behavioral;
