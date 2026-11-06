@@ -13,7 +13,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity rsa_accelerator is
+entity RSA_accelerator is
 	generic (
 		-- Users to add parameters here
 		C_BLOCK_SIZE : integer := 256;
@@ -79,9 +79,9 @@ entity rsa_accelerator is
 		m00_axis_tlast  : out std_logic;
 		m00_axis_tready : in std_logic
 	);
-end rsa_accelerator;
+end RSA_accelerator;
 
-architecture rtl of rsa_accelerator is
+architecture rtl of RSA_accelerator is
 
 	-----------------------------------------------------------------------------
 	-- msgin-core interface
