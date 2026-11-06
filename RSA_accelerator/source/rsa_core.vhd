@@ -65,26 +65,27 @@ entity rsa_core is
 	);
 end rsa_core;
 
-architecture rtl of rsa_core is
 
+architecture rtl of rsa_core is
 begin
-	i_exponentiation : entity work.exponentiation
+	i_rsa : entity work.rsa_toplevel
 		generic map (
-			C_block_size => C_BLOCK_SIZE
+			H => C_BLOCK_SIZE
 		)
 		port map (
-			message   => msgin_data  ,
-			key       => key_e_d     ,
-			valid_in  => msgin_valid ,
-			ready_in  => msgin_ready ,
-			ready_out => msgout_ready,
-			valid_out => msgout_valid,
-			result    => msgout_data ,
-			modulus   => key_n       ,
-			clk       => clk         ,
-			reset_n   => reset_n
+			clk          => clk,
+			reset_n      => reset_n,
+			msgin_valid  => msgin_valid,
+			msgin_ready  => msgin_ready,
+			msgin_last   => msgin_last,
+			msgin_data   => msgin_data,
+			msgout_valid => msgout_valid,
+			msgout_ready => msgout_ready,
+			msgout_last  => msgout_last,
+			msgout_data  => msgout_data,
+			n            => key_n,
+			e            => key_e_d
 		);
 
-	msgout_last  <= msgin_last;
-	rsa_status   <= (others => '0');
+	rsa_status <= (others => '0');
 end rtl;

@@ -24,7 +24,7 @@ eval( EAInclude(ISEJScriptLib) );
 
 
 ISEStep( "vivado",
-         "-log RSA_accelerator.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source RSA_accelerator.tcl" );
+         "-log rsa_toplevel.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source rsa_toplevel.tcl" );
 
 
 

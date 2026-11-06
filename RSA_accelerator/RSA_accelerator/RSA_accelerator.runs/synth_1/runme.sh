@@ -25,7 +25,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/bestitest/TFE4141_DDS1_RSA_integration_kit_2026/tfe4141_rsa_integration_kit_2026/RSA_accelerator/RSA_accelerator/RSA_accelerator.runs/synth_1'
+HD_PWD='C:/Users/student/Documents/RSA core project/dds1/RSA_accelerator/RSA_accelerator/RSA_accelerator.runs/synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
@@ -41,4 +41,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log RSA_accelerator.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source RSA_accelerator.tcl
+EAStep vivado -log rsa_toplevel.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source rsa_toplevel.tcl

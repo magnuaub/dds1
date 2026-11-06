@@ -64,6 +64,8 @@ architecture Behavioral of rsa_toplevel is
     ------------------------------------------------------------
     signal mul_reset_n : std_logic := '0';
     signal sq_reset_n  : std_logic := '0';
+    signal last_r      : std_logic := '0';
+    signal fsm_last    : std_logic;
 
 begin
 
@@ -84,7 +86,7 @@ begin
 
             msgout_valid => msgout_valid,
             msgout_ready => msgout_ready,
-            msgout_last  => msgout_last,
+            msgout_last  => fsm_last,
 
             e_bit        => e_bit,
             mul_done     => mul_done,
@@ -149,6 +151,7 @@ begin
                 P_reg <= (others => '0');
                 E_reg <= (others => '0');
                 N_reg <= (others => '0');
+                msgout_last <= '0';
 
                 mul_reset_n <= '0';
                 sq_reset_n  <= '0';
@@ -160,6 +163,7 @@ begin
                 P_reg <= msgin_data;
                 E_reg <= e;
                 N_reg <= n;
+                last_r <= msgin_last;
 
                 mul_reset_n <= '0';
                 sq_reset_n  <= '0';
@@ -209,5 +213,6 @@ begin
     -- RSA output data
     ------------------------------------------------------------
     msgout_data <= C_reg;
+    msgout_last <= fsm_last and last_r;
 
 end Behavioral;

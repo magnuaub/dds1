@@ -165,26 +165,6 @@ begin
             end case;
         end if;
 
-    end process;
-
-    ------------------------------------------------------------
-    -- Single-word input protocol check (simulation only)
-    ------------------------------------------------------------
-    -- synthesis translate_off
-    process(clk)
-    begin
-        if rising_edge(clk) then
-            if reset_n = '1' and
-               msgin_valid = '1' and
-               msgin_ready = '1' then
-
-                assert msgin_last = '1'
-                    report "RSA expects msgin_last = 1"
-                    severity failure;
-
-            end if;
-        end if;
-    end process;
-    -- synthesis translate_on
+    end process; 
 
 end Behavioral;
