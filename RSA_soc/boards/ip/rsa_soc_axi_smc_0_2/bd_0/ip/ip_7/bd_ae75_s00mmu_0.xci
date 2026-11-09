@@ -2,7 +2,7 @@
   "schema": "xilinx.com:schema:json_instance:1.0",
   "ip_inst": {
     "xci_name": "bd_ae75_s00mmu_0",
-    "cell_name": "s00_mmu",
+    "cell_name": "s00_entry_pipeline/s00_mmu",
     "component_reference": "xilinx.com:ip:sc_mmu:1.0",
     "ip_revision": "16",
     "gen_directory": ".",
@@ -2335,5 +2335,5 @@
       }
     }
   },
-  "checksum": "11de38e8"
+  "checksum": "ea86898f"
 }

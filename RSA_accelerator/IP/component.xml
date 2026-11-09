@@ -1092,7 +1092,7 @@
       <xilinx:displayName>RSA_accelerator_v1_0</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
       <xilinx:coreRevision>2</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2026-11-06T11:48:33Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2026-11-08T11:54:36Z</xilinx:coreCreationDateTime>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2025.2</xilinx:xilinxVersion>
