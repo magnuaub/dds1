@@ -22,7 +22,8 @@ use ieee.numeric_std.all;
 entity rsa_core is
 	generic (
 		-- Users to add parameters here
-		C_BLOCK_SIZE          : integer := 256
+		C_BLOCK_SIZE          : integer := 256;
+		NUM_CORES             : integer := 7
 	);
 	port (
 		-----------------------------------------------------------------------------
@@ -67,7 +68,24 @@ end rsa_core;
 
 
 architecture rtl of rsa_core is
+       --every core signal needs its own copy indexed by i, and logic to pick a core
+       type data_array is array(0 to NUM_CORES-1) of std_logic_vector(C_BLOCK_SIZE-1 downto 0);
+       
+       signal core_msgin_valid     : std_logic_vector(NUM_CORES-1 downto 0);
+       signal core_msgin_ready    : std_logic_vector(NUM_CORES-1 downto 0);
+       signal core_msgout_valid    : std_logic_vector(NUM_CORES-1 downto 0);
+       signal core_msgout_ready    : std_logic_vector(NUM_CORES-1 downto 0);
+       signal core_msgout_data     : data_array;
+       signal core_msgout_last     : std_logic_vector(NUM_CORES-1 downto 0);
+       
+       signal in_core_sel       : integer range 0 to NUM_CORES-1;
+       signal out_core_sel      : integer range 0 to NUM_CORES-1;
+       
 begin
+gen_cores: for i in 0 to NUM_CORES-1 generate
+    core_msgin_valid(i)    <= msgin_valid when in_core_sel = i else '0';
+    core_msgout_ready(i)   <= msgout_ready when out_core_sel = i else '0';
+    
 	i_rsa : entity work.rsa_toplevel
 		generic map (
 			H => C_BLOCK_SIZE
@@ -75,17 +93,64 @@ begin
 		port map (
 			clk          => clk,
 			reset_n      => reset_n,
-			msgin_valid  => msgin_valid,
-			msgin_ready  => msgin_ready,
+			msgin_valid  => core_msgin_valid(i),
+			msgin_ready  => core_msgin_ready(i),
 			msgin_last   => msgin_last,
 			msgin_data   => msgin_data,
-			msgout_valid => msgout_valid,
-			msgout_ready => msgout_ready,
-			msgout_last  => msgout_last,
-			msgout_data  => msgout_data,
+			msgout_valid => core_msgout_valid(i),
+			msgout_ready => core_msgout_ready(i),
+			msgout_last  => core_msgout_last(i),
+			msgout_data  => core_msgout_data(i),
 			n            => key_n,
 			e            => key_e_d
 		);
 
-	rsa_status <= (others => '0');
+end generate gen_cores;
+	
+	-- outputs
+	msgin_ready         <= core_msgin_ready(in_core_sel);
+    msgout_valid        <= core_msgout_valid(out_core_sel);
+    msgout_data         <= core_msgout_data(out_core_sel);
+    msgout_last         <= core_msgout_last(out_core_sel);
+    
+    
+    process(clk)
+    begin
+        if rising_edge(clk) then
+            if reset_n = '0' then
+                in_core_sel <= 0;
+                out_core_sel <= 0; 
+            else
+            
+            -- block accepted by the selected core -> next block to next core
+            if msgin_valid = '1' and core_msgin_ready(in_core_sel) = '1' then
+                if in_core_sel = NUM_CORES-1 then
+                    in_core_sel <= 0;
+                else
+                    in_core_sel <= in_core_sel + 1;
+                end if;
+            end if;
+            
+            -- result taken from selected core -> next result from next core
+            if core_msgout_valid(out_core_sel) = '1' and msgout_ready = '1' then
+                if out_core_sel = NUM_CORES-1 then
+                    out_core_sel <= 0;
+                else
+                    out_core_sel <= out_core_sel + 1;
+           end if;
+         end if; 
+            
+         end if;
+       end if;
+     end process; 
+     
+     --status on cores
+     process(core_msgin_ready)
+     begin
+        rsa_status <= (others => '0');
+        for i in 0 to NUM_CORES-1 loop
+            rsa_status(i) <= not core_msgin_ready(i);
+        end loop;
+     end process;
+                
 end rtl;
