@@ -151,7 +151,7 @@ begin
                 P_reg <= (others => '0');
                 E_reg <= (others => '0');
                 N_reg <= (others => '0');
-                msgout_last <= '0';
+                last_r <= '0';
 
                 mul_reset_n <= '0';
                 sq_reset_n  <= '0';

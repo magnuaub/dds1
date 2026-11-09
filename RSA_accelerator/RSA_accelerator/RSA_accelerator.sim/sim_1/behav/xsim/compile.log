@@ -1,6 +1,4 @@
-INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/student/Documents/RSA core project/dds1/RSA_accelerator/RSA_accelerator/RSA_accelerator.srcs/sources_1/new/fsm.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'rsa_fsm'
-INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/student/Documents/RSA core project/dds1/RSA_accelerator/RSA_accelerator/RSA_accelerator.srcs/sources_1/new/rsa_toplevel.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'rsa_toplevel'
-INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/student/Documents/RSA core project/dds1/RSA_accelerator/RSA_accelerator/RSA_accelerator.srcs/sim_1/new/rsa_toplevel_tb.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'rsa_toplevel_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/student/Documents/RSA_core_project/dds1/RSA_accelerator/source/rsa_core.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'rsa_core'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/student/Documents/RSA_core_project/dds1/RSA_accelerator/testbench/rsa_accelerator_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'rsa_accelerator_tb'
